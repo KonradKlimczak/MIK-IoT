@@ -33,3 +33,25 @@ end
 print("ATTACH HANDLER");
 gpio.trig(1, "both", onChange);
 print("HANDLER ATTACHED");
+
+wifi.setmode(wifi.STATION)
+
+station_cfg={};
+station_cfg.ssid="does not work";
+station_cfg.pwd="does not work";
+wifi.sta.config(station_cfg)
+tmr.delay(1000000)   -- wait 1,000,000 us = 1 second
+wifi.sta.connect()
+tmr.delay(1000000)   -- wait 1,000,000 us = 1 second
+status_of_wifi = wifi.sta.status()
+print(status_of_wifi);
+print(wifi.STA_IDLE);
+print(wifi.STA_WRONGPWD);
+print(wifi.STA_FAIL);
+if status_of_wifi == wifi.STA_IDLE then print("IDLE") end;
+if status_of_wifi == wifi.STA_CONNECTING then print("CONNECTING") end;
+if status_of_wifi == wifi.STA_WRONGPWD then print("WRONG PS") end;
+if status_of_wifi == wifi.STA_APNOTFOUND then print("404") end;
+if status_of_wifi == wifi.STA_FAIL then print("500") end;
+print(wifi.sta.getip())
+

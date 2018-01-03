@@ -33,7 +33,6 @@ tmr.alarm(1, 1000, 1, function()
     end
  end)
 
-<<<<<<< HEAD
 print("ATTACH HANDLER");
 gpio.trig(1, "both", onChange);
 print("HANDLER ATTACHED");
@@ -59,5 +58,3 @@ if status_of_wifi == wifi.STA_APNOTFOUND then print("404") end;
 if status_of_wifi == wifi.STA_FAIL then print("500") end;
 print(wifi.sta.getip())
 
-=======
->>>>>>> 0a54b2a1c09734e738c8049b5c06c378205a0abf

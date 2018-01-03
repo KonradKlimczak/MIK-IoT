@@ -1,5 +1,3 @@
-print("PIN TEST");
-
 -- shamelessly adapted from github https://gist.github.com/marcelstoer/59563e791effa4acb65f
 function debounce (func)
     local last = 0
@@ -16,20 +14,26 @@ function debounce (func)
     end
 end
 
-couter = 0
+--init.lua
+print("Setting up wifi")
+wifi.setmode(wifi.STATION)
+--WIFI_CONFIG LOADED FROM secrets.lue
+wifi.sta.config(WIFI_CONFIG)
+wifi.sta.connect()
+wifi.sta.autoconnect(1)
+tmr.alarm(1, 1000, 1, function()
+    if wifi.sta.getip()== nil then
+      print("Waiting on dhcp...")
+    else
+      tmr.stop(1)
+      print("Config done, IP is "..wifi.sta.getip())
+      print("You have 5 seconds to abort startup")
+      print("Waiting...")
+      tmr.alarm(0, 5000, 0, startup)
+    end
+ end)
 
-print("SETTING UP PIN 1 - this is the one I use probably");
-gpio.mode(1, gpio.INT, gpio.PULLUP)
-
-print("DEFINE HANDLER");
-function onChange (level)
-    print("LEVEL"..level);
-    print("OPENN TIMES "..couter)
-    couter = couter + 1
-    print("PIN IS GETING SIGNAL");
-    print("IT WORKS");
-end
-
+<<<<<<< HEAD
 print("ATTACH HANDLER");
 gpio.trig(1, "both", onChange);
 print("HANDLER ATTACHED");
@@ -55,3 +59,5 @@ if status_of_wifi == wifi.STA_APNOTFOUND then print("404") end;
 if status_of_wifi == wifi.STA_FAIL then print("500") end;
 print(wifi.sta.getip())
 
+=======
+>>>>>>> 0a54b2a1c09734e738c8049b5c06c378205a0abf
